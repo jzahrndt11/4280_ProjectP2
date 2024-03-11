@@ -53,6 +53,5 @@ int main(int argc, char* argv[]) {
     if (outputFileCreated) {
         system("rm out");
     }
-    fclose(filePointer);
     return 0;
 }

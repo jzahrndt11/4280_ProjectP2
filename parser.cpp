@@ -5,6 +5,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include "string.h"
 
@@ -22,55 +23,70 @@ const char* tokenNames[] = {
 // Initialization of Global Variables
 char nextChar = 0;
 Token tokenInfo;
-
+FILE* filteredFilePointer = nullptr;
+int line = 1;
 
 // Test Scanner Function
 void parser() {
     memset(tokenInfo.tokenInstance, '\0', MAX_TOKEN_SIZE);
 
+    // filter out comments
+    filter();
+
     // get first char
-    nextChar = fgetc(filePointer);
+    nextChar = fgetc(filteredFilePointer);
 
-    do {
+    // run scanner
+    tokenInfo = scanner();
+
+    // start production S
+    S();
+
+    // Print token info
+    printf("%s\t%s\t%d\n", tokenNames[tokenInfo.tokenId], tokenInfo.tokenInstance, tokenInfo.lineNum);
+
+}
+
+// function to remove comments
+void filter() {
+    bool comment = false;
+    char* filteredFile = "filter.txt";
+    filteredFilePointer = fopen(filteredFile, "w");
+
+    if (filteredFilePointer == nullptr) {
+        perror("Error opening file { filteredFile }");
+        exit(EXIT_FAILURE);
+    }
+
+    int c;
+    while ((c = fgetc(filteredFilePointer)) != EOF) {
         // Skip Comments
-//        while (comment) {
-//            nextChar = fgetc(filePointer);
-//
-//            // Increment line if new line is found
-//            if (nextChar == 10) {
-//                line++;
-//            }
-//
-//            // end of comment
-//            if (nextChar == 35) {
-//                comment = false;
-//                nextChar = fgetc(filePointer);
-//            }
-//        }
-//
-//        // Check for start of comment
-//        if (nextChar == 35) {
-//            comment = true;
-//            continue;
-//        }
-//
-//        // Skip Spaces
-//        while (isspace(nextChar)) {
-//            // Increment line if new line is found
-//            if (nextChar == 10) {
-//                line++;
-//            }
-//
-//            nextChar = fgetc(filePointer);
-//        }
+        while (comment) {
+            c = fgetc(filteredFilePointer);
 
-        // start scanner function
-        tokenInfo = scanner();
+            // Increment line if new line is found
+            if (c == 10) {
+                fputc(c, filteredFilePointer);
+            }
 
-        // Print token info
-        printf("%s\t%s\t%d\n", tokenNames[tokenInfo.tokenId], tokenInfo.tokenInstance, tokenInfo.lineNum);
+            // end of comment
+            if (c == 35) {
+                comment = false;
+                c = fgetc(filteredFilePointer);
+            }
+        }
 
-    } while (tokenInfo.tokenId != EOF_Token);
+        // Check for start of comment
+        if (c == 35) {
+            comment = true;
+            continue;
+        }
+
+        // if not a comment add to new file
+        fputc(c, filteredFilePointer);
+    }
+    fclose(filePointer);
+    fclose(filteredFilePointer);
 }
 
 // S -> CD          ( First set: t2 )
@@ -82,6 +98,7 @@ void S() {
         return;
     } else {
         printf("parser.cpp: Error in S()\n");
+        exit(EXIT_FAILURE);
     }
 }
 
@@ -95,6 +112,7 @@ void A() {
     }
     else {
         printf("parser.cpp: Error in A()\n");
+        exit(EXIT_FAILURE);
     }
 }
 
@@ -117,6 +135,7 @@ void B() {
     }
     else {
         printf("parser.cpp: Error in B()\n");
+        exit(EXIT_FAILURE);
     }
 }
 
@@ -132,6 +151,7 @@ void C() {
         }
     } else {
         printf("parser.cpp: Error in C()\n");
+        exit(EXIT_FAILURE);
     }
 }
 

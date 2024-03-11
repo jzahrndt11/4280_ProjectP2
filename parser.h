@@ -10,8 +10,11 @@
 
 extern char nextChar;
 extern FILE* filePointer;
+extern FILE* filteredFilePointer;
+extern int line;
 
 void parser();
+void filter();
 void S();
 void A();
 void B();
