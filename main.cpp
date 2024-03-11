@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 #include "parser.h"
+#include "testTree.h"
 
 FILE* filePointer = nullptr;
 
@@ -47,6 +48,7 @@ int main(int argc, char* argv[]) {
 
     // Test Scanner function call
     parser();
+    testTree();
 
     if (outputFileCreated) {
         system("rm out");
