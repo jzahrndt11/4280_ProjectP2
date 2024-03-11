@@ -41,6 +41,16 @@ Token scanner() {
 
 
     while (true) {
+        // Skip Spaces
+        while (isspace(nextChar)) {
+            // Increment line if new line is found
+            if (nextChar == 10) {
+                line++;
+            }
+
+            nextChar = fgetc(filePointer);
+        }
+
         // get colNum for table
         int colNum = getTableColumn(line);
 
