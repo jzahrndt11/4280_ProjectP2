@@ -1,5 +1,5 @@
 /*
- *  CS4280 - Project P1
+ *  CS4280 - Project P2
  *      - by. Jeremy Zahrndt
  *      - scanner.h
  */

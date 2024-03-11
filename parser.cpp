@@ -1,7 +1,7 @@
 /*
- *  CS4280 - Project P1
+ *  CS4280 - Project P2
  *      - by. Jeremy Zahrndt
- *      - testScanner.cpp
+ *      - parser.cpp
  */
 
 #include <stdio.h>
