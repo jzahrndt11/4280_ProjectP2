@@ -29,15 +29,14 @@ int tableArr[TABLE_SIZE][TABLE_SIZE] = {
 };
 
 // Scanner function return Token struct
-Token scanner(int line) {
+Token scanner() {
     Token token;
     int state = 0;
     int nextState;
     int tokenIndex = 0;
-    int lineNum = 1;
+    int line = 1;
     bool comment = false;
 
-    token.lineNum = line;
     memset(token.tokenInstance, '\0', MAX_TOKEN_SIZE);
     token.tokenId = Unknown;
 
@@ -65,15 +64,16 @@ Token scanner(int line) {
             continue;
         }
 
-        // Skip Spaces
+        // check for new line
         while (isspace(nextChar)) {
             // Increment line if new line is found
             if (nextChar == 10) {
                 line++;
             }
-
-            nextChar = fgetc(filePointer);
         }
+
+        // set line num
+        token.lineNum = line;
 
         // get colNum for table
         int colNum = getTableColumn(line);

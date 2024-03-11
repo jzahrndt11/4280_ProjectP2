@@ -26,15 +26,13 @@ Token tokenInfo;
 
 // Test Scanner Function
 void parser() {
-    int line = 1;
-    bool comment = false;
     memset(tokenInfo.tokenInstance, '\0', MAX_TOKEN_SIZE);
 
     // get first char
     nextChar = fgetc(filePointer);
 
     do {
-//        // Skip Comments
+        // Skip Comments
 //        while (comment) {
 //            nextChar = fgetc(filePointer);
 //
@@ -67,7 +65,7 @@ void parser() {
 //        }
 
         // start scanner function
-        tokenInfo = scanner(line);
+        tokenInfo = scanner();
 
         // Print token info
         printf("%s\t%s\t%d\n", tokenNames[tokenInfo.tokenId], tokenInfo.tokenInstance, tokenInfo.lineNum);
@@ -79,7 +77,7 @@ void parser() {
 void S() {
     if (tokenInfo.tokenId == T2_Token) {
         // process t2
-        tokenInfo = scanner(tokenInfo.lineNum);
+        tokenInfo = scanner();
         D();
         return;
     } else {
@@ -91,7 +89,7 @@ void S() {
 void A() {
     if (tokenInfo.tokenId == (T1_Token | T2_Token)) {
         // process t1 or t2 token
-        tokenInfo = scanner(tokenInfo.lineNum);
+        tokenInfo = scanner();
         X();
         return;
     }
@@ -104,14 +102,14 @@ void A() {
 void B() {
     if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '.') {
         // process .
-        tokenInfo = scanner(tokenInfo.lineNum);
+        tokenInfo = scanner();
         if (tokenInfo.tokenId == T2_Token) {
             // process t2
-            tokenInfo = scanner(tokenInfo.lineNum);
+            tokenInfo = scanner();
             A();
             if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '!') {
                 // process !
-                tokenInfo = scanner(tokenInfo.lineNum);
+                tokenInfo = scanner();
                 return;
             }
 
@@ -126,10 +124,10 @@ void B() {
 void C() {
     if (tokenInfo.tokenId == T2_Token) {
         // process t2
-        tokenInfo = scanner(tokenInfo.lineNum);
+        tokenInfo = scanner();
         if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '*') {
             // process *
-            tokenInfo = scanner(tokenInfo.lineNum);
+            tokenInfo = scanner();
             return;
         }
     } else {

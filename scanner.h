@@ -8,7 +8,7 @@
 
 #include "token.h"
 
-Token scanner(int);
+Token scanner();
 int getTableColumn(int);
 
 #endif
