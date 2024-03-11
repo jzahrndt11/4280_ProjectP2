@@ -35,7 +35,6 @@ Token scanner() {
     int nextState;
     int tokenIndex = 0;
 
-    token.lineNum = line;
     memset(token.tokenInstance, '\0', MAX_TOKEN_SIZE);
     token.tokenId = Unknown;
 
@@ -50,6 +49,9 @@ Token scanner() {
 
             nextChar = fgetc(filePointer);
         }
+
+        // set line number
+        token.lineNum = line;
 
         // get colNum for table
         int colNum = getTableColumn(line);
