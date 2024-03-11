@@ -40,7 +40,7 @@ void parser() {
     tokenInfo = scanner();
 
     // start production S
-    S();
+    //S();
 
     // Print token info
     printf("%s\t%s\t%d\n", tokenNames[tokenInfo.tokenId], tokenInfo.tokenInstance, tokenInfo.lineNum);
