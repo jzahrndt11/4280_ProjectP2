@@ -70,7 +70,7 @@ void filter() {
         while (comment) {
             c = fgetc(filePointer);
 
-            // Increment line if new line is found
+            // keep new line
             if (c == 10) {
                 fputc(c, filteredFilePointer);
             }
@@ -88,7 +88,16 @@ void filter() {
             continue;
         }
 
-        // if not a comment add to new file
+        while (isspace(c)) {
+            // keep new line
+            if (nextChar == 10) {
+                fputc(c,filteredFilePointer);
+            } else {
+                c = fgetc(filePointer);
+            }
+        }
+
+        // if not a comment or a whitespace add to new file
         fputc(c, filteredFilePointer);
     }
     fclose(filePointer);
