@@ -12,5 +12,17 @@ extern char nextChar;
 extern FILE* filePointer;
 
 void parser();
+void S();
+void A();
+void B();
+void C();
+void D();
+void E();
+void F();
+void G();
+void H();
+void J();
+void X();
+void Y();
 
 #endif
