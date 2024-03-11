@@ -34,6 +34,8 @@ Token scanner(int line) {
     int state = 0;
     int nextState;
     int tokenIndex = 0;
+    int lineNum = 1;
+    bool comment = false;
 
     token.lineNum = line;
     memset(token.tokenInstance, '\0', MAX_TOKEN_SIZE);
@@ -41,6 +43,38 @@ Token scanner(int line) {
 
 
     while (true) {
+        // Skip Comments
+        while (comment) {
+            nextChar = fgetc(filePointer);
+
+            // Increment line if new line is found
+            if (nextChar == 10) {
+                line++;
+            }
+
+            // end of comment
+            if (nextChar == 35) {
+                comment = false;
+                nextChar = fgetc(filePointer);
+            }
+        }
+
+        // Check for start of comment
+        if (nextChar == 35) {
+            comment = true;
+            continue;
+        }
+
+        // Skip Spaces
+        while (isspace(nextChar)) {
+            // Increment line if new line is found
+            if (nextChar == 10) {
+                line++;
+            }
+
+            nextChar = fgetc(filePointer);
+        }
+
         // get colNum for table
         int colNum = getTableColumn(line);
 

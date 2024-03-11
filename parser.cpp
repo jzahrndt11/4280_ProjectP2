@@ -34,37 +34,37 @@ void parser() {
     nextChar = fgetc(filePointer);
 
     do {
-        // Skip Comments
-        while (comment) {
-            nextChar = fgetc(filePointer);
-
-            // Increment line if new line is found
-            if (nextChar == 10) {
-                line++;
-            }
-
-            // end of comment
-            if (nextChar == 35) {
-                comment = false;
-                nextChar = fgetc(filePointer);
-            }
-        }
-
-        // Check for start of comment
-        if (nextChar == 35) {
-            comment = true;
-            continue;
-        }
-
-        // Skip Spaces
-        while (isspace(nextChar)) {
-            // Increment line if new line is found
-            if (nextChar == 10) {
-                line++;
-            }
-
-            nextChar = fgetc(filePointer);
-        }
+//        // Skip Comments
+//        while (comment) {
+//            nextChar = fgetc(filePointer);
+//
+//            // Increment line if new line is found
+//            if (nextChar == 10) {
+//                line++;
+//            }
+//
+//            // end of comment
+//            if (nextChar == 35) {
+//                comment = false;
+//                nextChar = fgetc(filePointer);
+//            }
+//        }
+//
+//        // Check for start of comment
+//        if (nextChar == 35) {
+//            comment = true;
+//            continue;
+//        }
+//
+//        // Skip Spaces
+//        while (isspace(nextChar)) {
+//            // Increment line if new line is found
+//            if (nextChar == 10) {
+//                line++;
+//            }
+//
+//            nextChar = fgetc(filePointer);
+//        }
 
         // start scanner function
         tokenInfo = scanner(line);
