@@ -12,6 +12,5 @@ extern char nextChar;
 extern FILE* filePointer;
 
 void parser();
-int getTableColumn(int);
 
 #endif

@@ -10,7 +10,9 @@
 #include "scanner.h"
 #include "parser.h"
 
-int tableArr[12][12] = {
+const int TABLE_SIZE = 12;
+
+int tableArr[TABLE_SIZE][TABLE_SIZE] = {
         { 1, -1, 3, 5, 6, -2, 8, -3, 10, -4, 0, 1001 },
         { -5, 2, -5, -5, -5, -5, -5, -5, -5, -5, -5, -5 },
         { 1002, 2, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002, 1002 },
@@ -97,6 +99,47 @@ Token scanner(int line) {
             state = nextState;
             token.tokenInstance[tokenIndex++] = nextChar;
             nextChar = fgetc(filePointer);
+        }
+    }
+}
+
+// function to get column number for FSA Table
+int getTableColumn(int line) {
+    if (isalpha(nextChar)) {
+        return 0;
+    } else if (isdigit(nextChar)){
+        return 1;
+    } else {
+        switch (nextChar) {
+            case '%':
+                return 2;
+            case '.':
+                return 3;
+            case '!':
+                return 3;
+            case '*':
+                return 4;
+            case '\"':
+                return 5;
+            case '?':
+                return 6;
+            case '$':
+                return 7;
+            case ',':
+                return 8;
+            case ';':
+                return 9;
+            case ' ':
+                return 10;
+            case '\n':
+                return 10;
+            case '\t':
+                return 10;
+            case EOF:
+                return 11;
+            default:
+                printf("Error Unknown Character { %c } Line { %d }\n", nextChar, line);
+                exit(EXIT_FAILURE);
         }
     }
 }
