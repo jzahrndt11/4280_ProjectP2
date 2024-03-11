@@ -9,6 +9,6 @@
 #include "token.h"
 
 Token scanner();
-int getTableColumn(int);
+int getTableColumn();
 
 #endif

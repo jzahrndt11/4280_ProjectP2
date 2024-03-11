@@ -54,7 +54,7 @@ Token scanner() {
         token.lineNum = line;
 
         // get colNum for table
-        int colNum = getTableColumn(line);
+        int colNum = getTableColumn();
 
         // get next state
         if (state < 12 && colNum < 12) {
@@ -117,7 +117,7 @@ Token scanner() {
 }
 
 // function to get column number for FSA Table
-int getTableColumn(int line) {
+int getTableColumn() {
     if (isalpha(nextChar)) {
         return 0;
     } else if (isdigit(nextChar)){
