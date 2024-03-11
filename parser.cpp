@@ -30,11 +30,18 @@ int line = 1;
 void parser() {
     memset(tokenInfo.tokenInstance, '\0', MAX_TOKEN_SIZE);
 
+    filePointer = fopen("filter.txt", "r");
+
+    if (filePointer == nullptr) {
+        perror("Fatal: Error Opening File!\n");
+        exit(EXIT_FAILURE);
+    }
+
     // filter out comments
     filter();
 
     // get first char
-    nextChar = fgetc(filteredFilePointer);
+    nextChar = fgetc(filePointer);
 
     // run scanner
     tokenInfo = scanner();

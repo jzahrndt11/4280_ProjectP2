@@ -99,7 +99,7 @@ Token scanner() {
             // If not an error or end of state append char to instance and get next char
             state = nextState;
             token.tokenInstance[tokenIndex++] = nextChar;
-            nextChar = fgetc(filteredFilePointer);
+            nextChar = fgetc(filePointer);
         }
     }
 }
