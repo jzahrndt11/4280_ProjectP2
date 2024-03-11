@@ -59,10 +59,10 @@ void filter() {
     }
 
     int c;
-    while ((c = fgetc(filteredFilePointer)) != EOF) {
+    while ((c = fgetc(filePointer)) != EOF) {
         // Skip Comments
         while (comment) {
-            c = fgetc(filteredFilePointer);
+            c = fgetc(filePointer);
 
             // Increment line if new line is found
             if (c == 10) {
@@ -72,7 +72,7 @@ void filter() {
             // end of comment
             if (c == 35) {
                 comment = false;
-                c = fgetc(filteredFilePointer);
+                c = fgetc(filePointer);
             }
         }
 
