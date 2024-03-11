@@ -11,6 +11,7 @@
 #include "scanner.h"
 #include "parser.h"
 
+int line = 1;
 const int TABLE_SIZE = 12;
 
 int tableArr[TABLE_SIZE][TABLE_SIZE] = {

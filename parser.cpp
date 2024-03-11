@@ -24,7 +24,6 @@ const char* tokenNames[] = {
 char nextChar = 0;
 Token tokenInfo;
 FILE* filteredFilePointer = nullptr;
-int line = 1;
 
 // Test Scanner Function
 void parser() {
