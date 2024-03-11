@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "testScanner.h"
+#include "parser.h"
 
 FILE* filePointer = nullptr;
 
@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
     }
 
     // Test Scanner function call
-    testScanner();
+    parser();
 
     if (outputFileCreated) {
         system("rm out");
