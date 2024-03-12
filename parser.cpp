@@ -90,7 +90,7 @@ void filter() {
 
         while (isspace(c)) {
             // keep new line
-            if (nextChar == 10) {
+            if (c == 10) {
                 fputc(c,filteredFilePointer);
                 //c = fgetc(filePointer);
             } else {
