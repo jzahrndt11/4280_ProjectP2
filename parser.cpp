@@ -92,7 +92,7 @@ void filter() {
             // keep new line
             if (c == 10) {
                 fputc(c,filteredFilePointer);
-                //c = fgetc(filePointer);
+                c = fgetc(filePointer);
             } else {
                 c = fgetc(filePointer);
             }
