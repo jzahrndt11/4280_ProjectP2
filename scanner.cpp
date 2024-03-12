@@ -107,7 +107,10 @@ Token scanner() {
         } else {
             // If not an error or end of state append char to instance and get next char
             state = nextState;
-            token.tokenInstance[tokenIndex++] = nextChar;
+            if (nextChar != 10) {
+                token.tokenInstance[tokenIndex++] = nextChar;
+            }
+            //token.tokenInstance[tokenIndex++] = nextChar;
             nextChar = fgetc(filePointer);
         }
     }
