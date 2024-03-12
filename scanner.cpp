@@ -41,7 +41,7 @@ Token scanner() {
 
 
     while (true) {
-        // Increment line if new line is found and skip new line
+        // Increment line if new line is found
         if (nextChar == 10) {
             line++;
             nextChar = fgetc(filePointer);
