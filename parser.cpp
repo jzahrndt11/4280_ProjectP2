@@ -117,7 +117,7 @@ void filter() {
 // S -> CD          ( First set: t2 )
 void S() {
     if (tokenInfo.tokenId == T2_Token) {
-        // process t2
+        C();
         tokenInfo = scanner();
         D();
         return;
@@ -130,7 +130,7 @@ void S() {
 // A -> FX          ( First set: t1 t2 )
 void A() {
     if (tokenInfo.tokenId == (T1_Token | T2_Token)) {
-        // process t1 or t2 token
+        F();
         tokenInfo = scanner();
         X();
         return;
@@ -182,7 +182,7 @@ void C() {
 
 // D -> Y           ( First set: , ,; . t2 *" ? empty )
 void D() {
-
+    Y();
 }
 
 // E -> ,AAH | ,;FH             ( First set: , | ,; )
