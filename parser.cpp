@@ -46,7 +46,16 @@ void parser() {
     tokenInfo = scanner();
 
     // start production S
-    //S();
+//    S();
+//
+//    // Check for EOFtk
+//    if (tokenInfo.tokenId == EOF_Token) {
+//        printf("Parsing Passed\n");
+//    }
+//    else {
+//        printf("parser.cpp: Error in parser()\n");
+//        exit(EXIT_FAILURE);
+//    }
 
     // Print token info
     printf("%s\t%s\t%d\n", tokenNames[tokenInfo.tokenId], tokenInfo.tokenInstance, tokenInfo.lineNum);

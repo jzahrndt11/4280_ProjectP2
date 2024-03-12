@@ -16,14 +16,6 @@ typedef enum {
     T1_Token,
     T2_Token,
     T3_Token,
-    T3_Period,
-    T3_Exclamation,
-    T3_Comma,
-    T3_CommaSemiColon,
-    T3_Question,
-    T3_QuestionDollar,
-    T3_Star,
-    T3_StarQuotation,
     Unknown
 } TokenId;
 
