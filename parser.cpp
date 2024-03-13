@@ -122,7 +122,7 @@ void S() {
         return;
     }
     else {
-        printf("ERROR{parser.cpp-S()} Language must start with T2 Token { You gave %s } - Line %d", tokenNames[tokenInfo.tokenId], tokenInfo.lineNum);
+        printf("ERROR{parser.cpp-S()} Language must start with T2 Token { You gave %s } - Line %d\n", tokenNames[tokenInfo.tokenId], tokenInfo.lineNum);
         exit(EXIT_FAILURE);
     }
 
@@ -136,7 +136,7 @@ void A() {
         return;
     }
     else {
-        printf("ERROR{parser.cpp-A()} T1 or T2 required { You gave %s } - Line %d", tokenNames[tokenInfo.tokenId], tokenInfo.lineNum);
+        printf("ERROR{parser.cpp-A()} T1 or T2 required { You gave %s } - Line %d\n", tokenNames[tokenInfo.tokenId], tokenInfo.lineNum);
         exit(EXIT_FAILURE);
     }
 }
@@ -159,7 +159,7 @@ void B() {
         }
     }
     else {
-        printf("ERROR:{parser.cpp-B()}  . required { You gave %s } - Line %d", tokenInfo.tokenInstance, tokenInfo.lineNum);
+        printf("ERROR:{parser.cpp-B()}  . required { You gave %s } - Line %d\n", tokenInfo.tokenInstance, tokenInfo.lineNum);
         exit(EXIT_FAILURE);
     }
 }
@@ -173,6 +173,10 @@ void C() {
             // process *
             tokenInfo = scanner();
             return;
+        }
+        else {
+            printf("ERROR:{parser.cpp-C()}  . required { You gave %s } - Line %d\n", tokenInfo.tokenInstance, tokenInfo.lineNum);
+            exit(EXIT_FAILURE);
         }
     } else {
         printf("parser.cpp: Error in C()\n");
