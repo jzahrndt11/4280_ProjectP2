@@ -59,7 +59,6 @@ void parser() {
 
     // Print token info
     printf("%s\t%s\t%d\n", tokenNames[tokenInfo.tokenId], tokenInfo.tokenInstance, tokenInfo.lineNum);
-
 }
 
 // function to remove comments
@@ -169,14 +168,16 @@ void B() {
 void C() {
     if (tokenInfo.tokenId == T2_Token) {
         // process t2
+        printf("process T2\n");
         tokenInfo = scanner();
         if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '*') {
             // process *
+            printf("process *\n");
             tokenInfo = scanner();
             return;
         }
         else {
-            printf("ERROR:{parser.cpp-C()}  . required { You gave %s } - Line %d\n", tokenInfo.tokenInstance, tokenInfo.lineNum);
+            printf("ERROR:{parser.cpp-C()}  * required { You gave %s } - Line %d\n", tokenInfo.tokenInstance, tokenInfo.lineNum);
             exit(EXIT_FAILURE);
         }
     } else {
@@ -211,11 +212,13 @@ void E() {
 void F() {
     if (tokenInfo.tokenId == T1_Token) {
         // process t1
+        printf("process T1\n");
         tokenInfo = scanner();
         return;
     }
     else if (tokenInfo.tokenId == T2_Token) {
         //process t2
+        printf("process T2\n");
         tokenInfo = scanner();
         return;
     }
@@ -248,6 +251,7 @@ void H(){
         E();
         if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '?') {
             // process ?
+            printf("process ?\n");
             tokenInfo = scanner();
             return;
         }
@@ -260,6 +264,7 @@ void H(){
         G();
         if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '.') {
             // process .
+            printf("process .\n");
             tokenInfo = scanner();
             return;
         } else {
@@ -274,15 +279,61 @@ void H(){
 
 // J -> *"A.        ( First set: *" )
 void J() {
-
+    if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '*' && tokenInfo.tokenInstance[1] == '"') {
+        //process *"
+        printf("process *\"\n");
+        tokenInfo = scanner();
+        A();
+        if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '.') {
+            // process .
+            printf("process .\n");
+            tokenInfo = scanner();
+            return;
+        }
+        else {
+            printf("parser.cpp: Error in J()\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+    else {
+        printf("parser.cpp: Error in J()\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
 // X -> F?$ | .         ( First set: t1 t2 | . )
 void X() {
-
+    if (tokenInfo.tokenId == (T1_Token | T2_Token)) {
+        F();
+        if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '?' && tokenInfo.tokenInstance[1] == '$') {
+            // process ?$
+            printf("process ?$\n");
+            tokenInfo = scanner();
+            return;
+        }
+        else {
+            printf("parser.cpp: Error in X()\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+    else if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '.') {
+        // process .
+        printf("process .\n");
+        tokenInfo = scanner();
+        return;
+    }
+    else {
+        printf("parser.cpp: Error in X()\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
 // Y -> H?Y | empty         ( First set: , ,; . t2 *" ? empty | empty )
 void Y() {
-
+//    if () {
+//
+//    }
+//    else {
+//        return;
+//    }
 }
