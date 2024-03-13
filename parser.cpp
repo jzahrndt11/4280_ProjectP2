@@ -46,16 +46,16 @@ void parser() {
     tokenInfo = scanner();
 
     // start production S
-//    S();
-//
-//    // Check for EOFtk
-//    if (tokenInfo.tokenId == EOF_Token) {
-//        printf("Parsing Passed\n");
-//    }
-//    else {
-//        printf("parser.cpp: Error in parser()\n");
-//        exit(EXIT_FAILURE);
-//    }
+    S();
+
+    // Check for EOFtk
+    if (tokenInfo.tokenId == EOF_Token) {
+        printf("Parsing Passed\n");
+    }
+    else {
+        printf("parser.cpp: Error in parser()\n");
+        exit(EXIT_FAILURE);
+    }
 
     // Print token info
     printf("%s\t%s\t%d\n", tokenNames[tokenInfo.tokenId], tokenInfo.tokenInstance, tokenInfo.lineNum);
@@ -118,25 +118,25 @@ void filter() {
 void S() {
     if (tokenInfo.tokenId == T2_Token) {
         C();
-        tokenInfo = scanner();
         D();
         return;
-    } else {
-        printf("parser.cpp: Error in S()\n");
+    }
+    else {
+        printf("ERROR{parser.cpp-S()} Language must start with T2 Token { You gave %s } - Line %d", tokenNames[tokenInfo.tokenId], tokenInfo.lineNum);
         exit(EXIT_FAILURE);
     }
+
 }
 
 // A -> FX          ( First set: t1 t2 )
 void A() {
     if (tokenInfo.tokenId == (T1_Token | T2_Token)) {
         F();
-        tokenInfo = scanner();
         X();
         return;
     }
     else {
-        printf("parser.cpp: Error in A()\n");
+        printf("ERROR{parser.cpp-A()} T1 or T2 required { You gave %s } - Line %d", tokenNames[tokenInfo.tokenId], tokenInfo.lineNum);
         exit(EXIT_FAILURE);
     }
 }
@@ -159,7 +159,7 @@ void B() {
         }
     }
     else {
-        printf("parser.cpp: Error in B()\n");
+        printf("ERROR:{parser.cpp-B()}  . required { You gave %s } - Line %d", tokenInfo.tokenInstance, tokenInfo.lineNum);
         exit(EXIT_FAILURE);
     }
 }
