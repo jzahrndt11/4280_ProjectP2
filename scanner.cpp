@@ -11,7 +11,7 @@
 #include "scanner.h"
 #include "parser.h"
 
-int line = 1;
+
 const int TABLE_SIZE = 12;
 
 int tableArr[TABLE_SIZE][TABLE_SIZE] = {
@@ -31,6 +31,7 @@ int tableArr[TABLE_SIZE][TABLE_SIZE] = {
 
 // Scanner function return Token struct
 Token scanner() {
+    int line = 1;
     Token token;
     int state = 0;
     int nextState;
@@ -42,7 +43,7 @@ Token scanner() {
 
     while (true) {
         // Increment line if new line is found
-        if (nextChar == 10) {
+        while (nextChar == 10) {
             line++;
             nextChar = fgetc(filePointer);
         }
@@ -51,7 +52,7 @@ Token scanner() {
         token.lineNum = line;
 
         // get colNum for table
-        int colNum = getTableColumn();
+        int colNum = getTableColumn(line);
 
         // get next state
         if (state < 12 && colNum < 12) {
@@ -117,7 +118,7 @@ Token scanner() {
 }
 
 // function to get column number for FSA Table
-int getTableColumn() {
+int getTableColumn(int line) {
     if (isalpha(nextChar)) {
         return 0;
     } else if (isdigit(nextChar)){

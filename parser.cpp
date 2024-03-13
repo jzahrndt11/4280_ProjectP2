@@ -23,7 +23,7 @@ const char* tokenNames[] = {
 // Initialization of Global Variables
 char nextChar = 0;
 Token tokenInfo;
-FILE* filteredFilePointer = nullptr;
+const char* filteredFile = "filter.txt";
 
 // Test Scanner Function
 void parser() {
@@ -33,7 +33,7 @@ void parser() {
     filter();
 
     // open filter.txt after comments have been removed
-    filePointer = fopen("filter.txt", "r");
+    filePointer = fopen(filteredFile, "r");
     if (filePointer == nullptr) {
         perror("Fatal: Error Opening File!\n");
         exit(EXIT_FAILURE);
@@ -65,7 +65,8 @@ void parser() {
 // function to remove comments
 void filter() {
     bool comment = false;
-    char* filteredFile = "filter.txt";
+    FILE* filteredFilePointer;
+
     filteredFilePointer = fopen(filteredFile, "w");
 
     if (filteredFilePointer == nullptr) {
@@ -191,22 +192,84 @@ void D() {
 
 // E -> ,AAH | ,;FH             ( First set: , | ,; )
 void E() {
-
+    if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == ','){
+        A();
+        A();
+        H();
+    }
+    else if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == ',' && tokenInfo.tokenInstance[1] == ';') {
+        F();
+        H();
+    }
+    else {
+        printf("parser.cpp: Error in E()\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
 // F -> t1 | t2         ( First set: t1 | t2 )
 void F() {
-
+    if (tokenInfo.tokenId == T1_Token) {
+        // process t1
+        tokenInfo = scanner();
+        return;
+    }
+    else if (tokenInfo.tokenId == T2_Token) {
+        //process t2
+        tokenInfo = scanner();
+        return;
+    }
+    else {
+        printf("parser.cpp: Error in F()\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
 // G -> B | C | J           ( First set: . | t2 | *" )
 void G() {
-
+    if (tokenInfo.tokenId == T2_Token) {
+        B();
+    }
+    else if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '.') {
+        C();
+    }
+    else if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '*' && tokenInfo.tokenInstance[1] == '"') {
+        J();
+    }
+    else {
+        printf("parser.cpp: Error in G()\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
 // H -> E? | G. | empty         ( First set: , ,; | . t2 *" | empty )
 void H(){
-
+    if (tokenInfo.tokenId == T3_Token && (tokenInfo.tokenInstance[0] == ',' || (tokenInfo.tokenInstance[0] == ',' && tokenInfo.tokenInstance[1] == ';'))) {
+        E();
+        if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '?') {
+            // process ?
+            tokenInfo = scanner();
+            return;
+        }
+        else {
+            printf("parser.cpp: Error in H()\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+    else if (tokenInfo.tokenId == T2_Token || (tokenInfo.tokenId == T3_Token && (tokenInfo.tokenInstance[0] == '.' || (tokenInfo.tokenInstance[0] == '*' && tokenInfo.tokenInstance[1] == '"')))) {
+        G();
+        if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '.') {
+            // process .
+            tokenInfo = scanner();
+            return;
+        } else {
+            printf("parser.cpp: Error in H()\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+    else {
+        return;
+    }
 }
 
 // J -> *"A.        ( First set: *" )

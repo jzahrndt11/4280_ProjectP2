@@ -53,5 +53,6 @@ int main(int argc, char* argv[]) {
     if (outputFileCreated) {
         system("rm out");
     }
+    system("rm filter.txt");
     return 0;
 }
