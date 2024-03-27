@@ -29,7 +29,7 @@ int tableArr[TABLE_SIZE][TABLE_SIZE] = {
         { 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004 }
 };
 
-// Scanner function return Token struct
+// Scanner function return Token struct -----------------------------------------------------------------------------------------------------------
 Token scanner() {
     int line = 1;
     Token token;
@@ -117,7 +117,7 @@ Token scanner() {
     }
 }
 
-// function to get column number for FSA Table
+// function to get column number for FSA Table ------------------------------------------------------------------------------------------------
 int getTableColumn(int line) {
     if (isalpha(nextChar)) {
         return 0;

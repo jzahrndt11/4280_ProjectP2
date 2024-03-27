@@ -11,6 +11,7 @@
 
 FILE* filePointer = nullptr;
 
+// main function -------------------------------------------------------------------------------------------------------------------
 int main(int argc, char* argv[]) {
     char* file;
     int character;
