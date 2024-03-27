@@ -20,7 +20,7 @@
 node_t* create(char label) {
     printf("Made it Here\n");
     node_t* newNode = (node_t*)malloc(sizeof(node_t));
-
+    printf("Made it Here\n");
     // check if memory allocation was successful
     if (newNode != NULL) {
         // Initialize node data
