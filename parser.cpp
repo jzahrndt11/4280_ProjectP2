@@ -13,13 +13,13 @@
 #include "scanner.h"
 #include "buildTree.h"
 
-//const char* tokenNames[] = {
-//        "EOF Token",
-//        "T1 Token",
-//        "T2 Token",
-//        "T3 Token",
-//        "Unknown"
-//};
+const char* tokenNames[] = {
+        "EOF Token",
+        "T1 Token",
+        "T2 Token",
+        "T3 Token",
+        "Unknown"
+};
 
 // Initialization of Global Variables
 char nextChar = 0;
