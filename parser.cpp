@@ -56,9 +56,6 @@ void parser() {
         printf("parser.cpp: Error in parser()\n");
         exit(EXIT_FAILURE);
     }
-
-    // Print token info
-    printf("%s\t%s\t%d\n", tokenNames[tokenInfo.tokenId], tokenInfo.tokenInstance, tokenInfo.lineNum);
 }
 
 // function to remove comments -----------------------------------------------------------------------------------------------------------------
@@ -247,27 +244,18 @@ void F() {
 // G -> B | C | J           ( First set: . | t2 | *" ) --------------------------------------------------------------------------------------------
 void G() {
     if (tokenInfo.tokenId == T2_Token) {
-        printf("Process t2 token { %s } in G()\n", tokenInfo.tokenInstance);  // process t2
-        tokenInfo = scanner();  // consume t2
-
         C();    // run non-terminal C
 
         printf("End of G()\n");
         return;
     }
     else if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '.') {
-        printf("Process { . } in G()\n");   // process .
-        tokenInfo = scanner();  //consume .
-
         B();    // run non-terminal B
 
         printf("End of G()\n");
         return;
     }
     else if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '*' && tokenInfo.tokenInstance[1] == '"') {
-        printf("Process { *\" } in G()\n");   // process *"
-        tokenInfo = scanner();  //consume *"
-
         J();    // run non-terminal J
 
         printf("End of G()\n");
@@ -296,19 +284,21 @@ void H(){
             exit(EXIT_FAILURE);
         }
     }
-    else if (tokenInfo.tokenId == T2_Token || (tokenInfo.tokenId == T3_Token && (tokenInfo.tokenInstance[0] == '.' || (tokenInfo.tokenInstance[0] == '*' && tokenInfo.tokenInstance[1] == '"')))) {
+    else if (tokenInfo.tokenId == T2_Token || (tokenInfo.tokenId == T3_Token && (tokenInfo.tokenInstance[0] == '.'
+        || (tokenInfo.tokenInstance[0] == '*' && tokenInfo.tokenInstance[1] == '"')))) {
+
         G();    // run non-terminal G
 
-        if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '.') {
-            printf("Process { . } in H()\n");   // process .
-            tokenInfo = scanner();  //consume .
+            if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '.') {
+                printf("Process { . } in H()\n");   // process .
+                tokenInfo = scanner();  //consume .
 
-            printf("End of H()\n");
-            return;
-        } else {
-            printf("ERROR parser.cpp-H(): { . } required. You gave { %s } - Line %d\n", tokenInfo.tokenInstance, tokenInfo.lineNum);
-            exit(EXIT_FAILURE);
-        }
+                printf("End of H()\n");
+                return;
+            } else {
+                printf("ERROR parser.cpp-H(): { . } required. You gave { %s } - Line %d\n", tokenInfo.tokenInstance, tokenInfo.lineNum);
+                exit(EXIT_FAILURE);
+            }
     }
     else {
         printf("{empty} End of H()\n");
