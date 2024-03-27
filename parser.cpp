@@ -113,6 +113,8 @@ void filter() {
 
 // S -> CD          ( First set: t2 ) ---------------------------------------------------------------------------------------------------------------------------
 void S() {
+    printf("S()\n");
+
     C();    // run non-terminal C
     D();    // run non-terminal D
 
@@ -121,6 +123,8 @@ void S() {
 
 // A -> FX          ( First set: t1 t2 )
 void A() {
+    printf("A()\n");
+
     F();    // run non-terminal F
     X();    // run non-terminal X
 
@@ -129,6 +133,8 @@ void A() {
 
 // B -> .t2A!       ( First set: . ) ---------------------------------------------------------------------------------------------------------------------------
 void B() {
+    printf("B()\n");
+
     if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '.') {
         printf("Process { . } in B()\n");   // process .
         tokenInfo = scanner();  //consume .
@@ -163,6 +169,8 @@ void B() {
 
 // C -> t2*         ( First set: t2 ) ------------------------------------------------------------------------------------------------------------------
 void C() {
+    printf("C()\n");
+
     if (tokenInfo.tokenId == T2_Token) {
         printf("Process t2 token { %s } in C()\n", tokenInfo.tokenInstance);  // process t2
         tokenInfo = scanner();  // consume t2
@@ -186,12 +194,16 @@ void C() {
 
 // D -> Y           ( First set: , ,; . t2 *" ? empty )
 void D() {
+    printf("D()\n");
+
     Y();    // run non-terminal Y
     printf("End of D()\n");
 }
 
 // E -> ,AAH | ,;FH             ( First set: , | ,; ) -----------------------------------------------------------------------------------------------
 void E() {
+    printf("E()\n");
+
     if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == ',' && tokenInfo.tokenInstance[1] != ';'){
         printf("Process { , } in E()\n");  // process ,
         tokenInfo = scanner();  // consume ,
@@ -221,6 +233,8 @@ void E() {
 
 // F -> t1 | t2         ( First set: t1 | t2 ) --------------------------------------------------------------------------------------------------------
 void F() {
+    printf("F()\n");
+
     if (tokenInfo.tokenId == T1_Token) {
         printf("Process t1 token { %s } in F()\n", tokenInfo.tokenInstance);  // process t1
         tokenInfo = scanner();  // consume t1
@@ -243,6 +257,8 @@ void F() {
 
 // G -> B | C | J           ( First set: . | t2 | *" ) --------------------------------------------------------------------------------------------
 void G() {
+    printf("G()\n");
+
     if (tokenInfo.tokenId == T2_Token) {
         C();    // run non-terminal C
 
@@ -269,6 +285,8 @@ void G() {
 
 // H -> E? | G. | empty         ( First set: , ,; | . t2 *" | empty ) -------------------------------------------------------------------------------
 void H(){
+    printf("H()\n");
+
     if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == ',' ) {
         E();    // run non-terminal E
 
@@ -308,6 +326,8 @@ void H(){
 
 // J -> *"A.        ( First set: *" ) ----------------------------------------------------------------------------------------------------------
 void J() {
+    printf("J()\n");
+
     if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '*' && tokenInfo.tokenInstance[1] == '"') {
         printf("Process { *\" } in J()\n");   // process *"
         tokenInfo = scanner();  //consume *"
@@ -334,6 +354,8 @@ void J() {
 
 // X -> F?$ | .         ( First set: t1 t2 | . ) ----------------------------------------------------------------------------------------------
 void X() {
+    printf("X()\n");
+
     if (tokenInfo.tokenId == T1_Token || tokenInfo.tokenId == T2_Token) {
         F();    // run non-terminal F
 
@@ -364,6 +386,8 @@ void X() {
 
 // Y -> H?Y | empty         ( First set: , ,; . t2 *" ? empty | empty ) ------------------------------------------------------------------------
 void Y() {
+    printf("Y()\n");
+
     if (tokenInfo.tokenId == T2_Token || (tokenInfo.tokenId == T3_Token && (tokenInfo.tokenInstance[0] == ',' || tokenInfo.tokenInstance[0] == '.'
         || tokenInfo.tokenInstance[0] == '?' || (tokenInfo.tokenInstance[0] == '*' && tokenInfo.tokenInstance[1] == '"')))){
 
