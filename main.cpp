@@ -13,6 +13,7 @@ FILE* filePointer = nullptr;
 
 // main function -------------------------------------------------------------------------------------------------------------------
 int main(int argc, char* argv[]) {
+    node_t* tree = NULL;
     char* file;
     int character;
     bool outputFileCreated = false;
@@ -48,7 +49,7 @@ int main(int argc, char* argv[]) {
     }
 
     // Test Scanner function call
-    parser();
+    tree = parser();
     testTree();
 
     if (outputFileCreated) {
