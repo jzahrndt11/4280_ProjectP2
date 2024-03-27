@@ -41,6 +41,24 @@ void traversePreOrder(node_t* root, int level) {
         }
     }
 
+    if (root->tokenInstanceTwo != NULL) {
+        if (root->tokenIdTwo != 4) {
+            printf("%*c%s%s\n", level+1*4, ' ', tokenNames1[root->tokenIdTwo], root->tokenInstanceTwo);
+        }
+        else {
+            printf("%*c%s\n", level+1*4, ' ', root->tokenInstanceTwo);
+        }
+    }
+
+    if (root->tokenInstanceThree != NULL) {
+        if (root->tokenIdThree != 4) {
+            printf("%*c%s%s\n", level+1*4, ' ', tokenNames1[root->tokenIdThree], root->tokenInstanceThree);
+        }
+        else {
+            printf("%*c%s\n", level+1*4, ' ', root->tokenInstanceThree);
+        }
+    }
+
     // traverse left-most subtree (if needed)
     if (root->childOne != NULL) {
         traversePreOrder(root->childOne, level + 1);
