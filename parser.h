@@ -7,23 +7,24 @@
 #define PARSER_H
 
 #include "token.h"
+#include "node.h"
 
 extern char nextChar;
 extern FILE* filePointer;
 
-void parser();
+node_t* parser();
 void filter();
-void S();
-void A();
-void B();
-void C();
-void D();
-void E();
-void F();
-void G();
-void H();
-void J();
-void X();
-void Y();
+node_t* S();
+node_t* A();
+node_t* B();
+node_t* C();
+node_t* D();
+node_t* E();
+node_t* F();
+node_t* G();
+node_t* H();
+node_t* J();
+node_t* X();
+node_t* Y();
 
 #endif

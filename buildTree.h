@@ -6,6 +6,8 @@
 #ifndef BUILDTREE_H
 #define BUILDTREE_H
 
+#include "node.h"
 
+node_t* create(char);
 
 #endif
