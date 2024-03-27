@@ -480,7 +480,6 @@ node_t* Y() {
 
         printf("{empty} End of Y()\n");
             p->tokenInstanceOne = "empty";
-
-            return p;
+        return p;
     }
 }
