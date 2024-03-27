@@ -334,7 +334,7 @@ void J() {
 
 // X -> F?$ | .         ( First set: t1 t2 | . ) ----------------------------------------------------------------------------------------------
 void X() {
-    if (tokenInfo.tokenId == (T1_Token | T2_Token)) {
+    if (tokenInfo.tokenId == T1_Token || tokenInfo.tokenId == T2_Token) {
         F();    // run non-terminal F
 
         if (tokenInfo.tokenId == T3_Token && tokenInfo.tokenInstance[0] == '?' && tokenInfo.tokenInstance[1] == '$') {
