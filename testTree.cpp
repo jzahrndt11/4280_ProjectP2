@@ -8,7 +8,7 @@
 
 #include "testTree.h"
 
-const char* tokenNames[] = {
+const char* tokenNames1[] = {
         "EOF Token",
         "T1 Token",
         "T2 Token",
@@ -34,7 +34,7 @@ void traversePreOrder(node_t* root, int level) {
 
     if (root->tokenInstanceOne != NULL) {
         if (root->tokenIdOne != 4) {
-            printf("%*c%s%s\n", level+1*4, ' ', tokenNames[root->tokenIdOne], root->tokenInstanceOne);
+            printf("%*c%s%s\n", level+1*4, ' ', tokenNames1[root->tokenIdOne], root->tokenInstanceOne);
         }
         else {
             printf("%*c%s\n", level+1*4, ' ', root->tokenInstanceOne);
