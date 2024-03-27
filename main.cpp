@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
 
     // Test Scanner function call
     tree = parser();
-    testTree();
+    testTree(tree);
 
     if (outputFileCreated) {
         system("rm out");

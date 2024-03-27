@@ -6,6 +6,9 @@
 #ifndef TESTTREE_H
 #define TESTTREE_H
 
-void testTree();
+#include "node.h"
+
+void testTree(node_t*);
+void traversePreOrder(node_t*, int);
 
 #endif
