@@ -370,8 +370,12 @@ node_t* H(){
             }
     }
     else {
+        node_t* p = create('H');
+
         printf("{empty} End of H()\n");
-        return NULL;
+            p->tokenInstanceOne = "empty";
+
+        return p;
     }
 }
 

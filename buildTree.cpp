@@ -33,6 +33,5 @@ node_t* create(char label) {
         newNode->tokenInstanceThree = NULL;
         newNode->tokenIdThree = 4; // Unknown
     }
-    printf("Made it Here\n");
     return newNode;
 }
