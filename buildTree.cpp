@@ -18,6 +18,7 @@
 
 // Create a New Node of the Binary Tree --------------------------------------------------------------------------------
 node_t* create(char label) {
+    printf("Made it Here\n");
     node_t* newNode = (node_t*)malloc(sizeof(node_t));
 
     // check if memory allocation was successful
