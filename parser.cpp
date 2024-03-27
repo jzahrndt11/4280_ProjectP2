@@ -476,7 +476,11 @@ node_t* Y() {
             }
     }
     else {
+        node_t* p = create('Y');
+
         printf("{empty} End of Y()\n");
-        return NULL;
+            p->tokenInstanceOne = "empty";
+
+            return p;
     }
 }
