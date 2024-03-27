@@ -8,6 +8,14 @@
 
 #include "testTree.h"
 
+const char* tokenNames[] = {
+        "EOF Token",
+        "T1 Token",
+        "T2 Token",
+        "T3 Token",
+        "Unknown"
+};
+
 // Test Tree function -----------------------------------------------------------------------------------------------------------------
 void testTree(node_t* tree) {
     printf("TestTree.cpp: { Hello }\n");
@@ -23,6 +31,15 @@ void traversePreOrder(node_t* root, int level) {
 
     // print current node detail
     printf("%*c%c\n", level*4, ' ', root->label);
+
+    if (root->tokenInstanceOne != NULL) {
+        if (root->tokenIdOne != 4) {
+            printf("%*c%s%s\n", level+1*4, ' ', tokenNames[root->tokenIdOne], root->tokenInstanceOne);
+        }
+        else {
+            printf("%*c%s\n", level+1*4, ' ', root->tokenInstanceOne);
+        }
+    }
 
     // traverse left-most subtree (if needed)
     if (root->childOne != NULL) {

@@ -13,13 +13,13 @@
 #include "scanner.h"
 #include "buildTree.h"
 
-const char* tokenNames[] = {
-        "EOF Token",
-        "T1 Token",
-        "T2 Token",
-        "T3 Token",
-        "Unknown"
-};
+//const char* tokenNames[] = {
+//        "EOF Token",
+//        "T1 Token",
+//        "T2 Token",
+//        "T3 Token",
+//        "Unknown"
+//};
 
 // Initialization of Global Variables
 char nextChar = 0;
@@ -28,7 +28,7 @@ const char* filteredFile = "filter.txt";
 
 // Parser Function -------------------------------------------------------------------------------------------------------------------------------
 node_t* parser() {
-    node_t* root;
+    node_t* root = NULL;
     memset(tokenInfo.tokenInstance, '\0', MAX_TOKEN_SIZE);
 
     // filter out comments
